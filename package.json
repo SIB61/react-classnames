@@ -1,0 +1,23 @@
+{
+  "name": "@sib61/react-classnames",
+  "version": "1.2.2",
+  "type": "module",
+  "main":"dist/index.js",
+  "scripts": {
+    "release:beta": "rm -rf dist && tsc && npm publish --tag beta"
+  },
+  "dependencies": {
+    "@sib61/jsx-classnames": "^0.0.6"
+  },
+  "peerDependencies":{
+    "react": ">=15"
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^5.0.2"
+  },
+  "files": ["dist"]
+}
