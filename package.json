@@ -1,13 +1,13 @@
 {
   "name": "@sib61/react-classnames",
-  "version": "1.2.2",
+  "version": "1.2.5",
   "type": "module",
   "main":"dist/index.js",
   "scripts": {
     "release:beta": "rm -rf dist && tsc && npm publish --tag beta"
   },
   "dependencies": {
-    "@sib61/jsx-classnames": "^0.0.6"
+    "@sib61/jsx-classnames": "^0.0.8"
   },
   "peerDependencies":{
     "react": ">=15"

@@ -1,52 +1,52 @@
 import React from "react";
 import { Styles } from "@sib61/jsx-classnames";
-type Props = {
+type FnProps = {
   children?: React.ReactNode;
-  modules?: Array<any>;
+  styles: (classname: string) => string;
+  ignore?: React.ReactNode[];
 };
-export const Css = ({ children, modules }: Props)=> {
-  if (!children) {
-    return <></>;
-  }
-  if (!modules?.length || typeof children !== "object") {
-    return <>{children}</>;
+function replaceClassName({ styles, ignore, children }: FnProps): any {
+  if (typeof children !== "object" || ignore?.some((ig) => ig == children)) {
+    return children;
   }
   if (Array.isArray(children)) {
-    return (
-      <>
-        {children?.map((child, i) => {
-          return (
-            <Css key={i} modules={modules}>
-              {child}
-            </Css>
-          );
-        })}
-      </>
+    children = children.map((child) =>
+      replaceClassName({ children: child, styles, ignore })
     );
+  } else {
+    if (React.isValidElement(children)) {
+      const props = { ...children.props };
+      if (props.children) {
+        props.children = replaceClassName({
+          children: props.children,
+          styles,
+          ignore,
+        });
+      }
+      if (props.className) {
+        props.className = styles(props.className);
+      }
+      if (props.className || props.children) {
+        children = { ...children, props };
+      }
+    }
   }
-  children = children as React.ReactElement
-  if (children.props?.children) {
-    children = {
-      ...children,
-      props: {
-        ...children.props,
-        children: (
-          <Css modules={modules}>
-            {children.props.children}
-          </Css>
-        ),
-      },
-    };
-  }
-  if (children.props?.className) {
-    const styles = Styles.from(...modules);
-    children = {
-      ...children,
-      props: {
-        ...children.props,
-        className: styles(children.props.className),
-      },
-    };
-  }
-  return <>{children}</>;
+  return children;
 }
+
+type CmpProps = {
+  children?: React.ReactNode;
+  module: {
+    [key: string]: string;
+  };
+  ignore?: React.ReactNode[];
+};
+export const Css = ({ children, module, ignore }: CmpProps) => {
+  try {
+    if (module) {
+      const styles = Styles.from(module);
+      children = replaceClassName({ children, styles, ignore });
+    }
+  } catch (err) {}
+  return <>{children}</>;
+};
