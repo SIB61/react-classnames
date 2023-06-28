@@ -4,7 +4,8 @@
   "type": "module",
   "main":"dist/index.js",
   "scripts": {
-    "release:beta": "rm -rf dist && tsc && npm publish --tag beta"
+    "release:beta": "rm -rf dist && tsc && npm publish --tag beta",
+    "release:latest": "rm -rf dist && tsc && npm publish --tag latest"
   },
   "dependencies": {
     "@sib61/jsx-classnames": "^0.0.8"
