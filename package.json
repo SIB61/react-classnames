@@ -27,5 +27,11 @@
     "classnames",
     "jsx",
     "jsx-classnames"
-  ]
+  ],
+  "author": "sib61",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sib61/react-classnames/issues"
+  },
+  "homepage": "https://github.com/sib61/react-classnames#readme"
 }
