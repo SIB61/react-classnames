@@ -26,3 +26,19 @@
    </Css>
  }
 ```
+
+```css
+  .div{
+
+  }
+  .li{
+
+  }
+  .ul{
+
+  }
+```
+
+you can directly style your <element></element> by creating a 
+class named .element . such as .div class will be applied for all div in 
+that component automatically.

@@ -1,6 +1,6 @@
 {
   "name": "@sib61/react-classnames",
-  "version": "1.2.5",
+  "version": "1.2.8",
   "type": "module",
   "main":"dist/index.js",
   "scripts": {
@@ -20,5 +20,12 @@
     "@types/react-dom": "^18.0.11",
     "typescript": "^5.0.2"
   },
-  "files": ["dist"]
+  "files": ["dist"],
+  "keywords":[
+    "react",
+    "reactjs",
+    "classnames",
+    "jsx",
+    "jsx-classnames"
+  ]
 }

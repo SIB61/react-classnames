@@ -23,8 +23,18 @@ function replaceClassName({ styles, ignore, children }: FnProps): any {
           ignore,
         });
       }
+      let className = "";
+      if (typeof children.type === "string") {
+        const typeStyles = styles(children.type);
+        if (typeStyles.trim() !== children.type) {
+          className += typeStyles;
+        }
+      }
       if (props.className) {
-        props.className = styles(props.className);
+        className += styles(props.className);
+      }
+      if (className) {
+        props.className = className;
       }
       if (props.className || props.children) {
         children = { ...children, props };
@@ -39,13 +49,21 @@ type CmpProps = {
   module: {
     [key: string]: string;
   };
-  ignore?: React.ReactNode[];
+  ignore?: React.ReactNode[] | React.ReactNode;
 };
+
 export const Css = ({ children, module, ignore }: CmpProps) => {
   try {
     if (module) {
       const styles = Styles.from(module);
-      children = replaceClassName({ children, styles, ignore });
+      if(ignore && !Array.isArray(ignore)){
+        ignore = [ignore]
+      }
+      children = replaceClassName({
+        children,
+        styles,
+        ignore: ignore as React.ReactNode[],
+      });
     }
   } catch (err) {}
   return <>{children}</>;
